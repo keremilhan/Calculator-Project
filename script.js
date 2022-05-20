@@ -1,5 +1,6 @@
 const previousOperand = document.querySelector(".previous"); 
 const currentOperand = document.querySelector(".current"); 
+const result = document.querySelector(".result"); 
 const numberBtns = document.querySelectorAll(".number");
 const operatorBtns = document.querySelectorAll(".operator");
 const equalsBtn = document.querySelector(".equals");
@@ -20,10 +21,12 @@ function numbers(e){
     if(e.target.classList.contains("number")){
         currentOperand.textContent += e.target.textContent;
     }else if(e.target.classList.contains("operator")){
+        calc();
         operator.push(e.target.textContent);
         previousOperand.textContent =  currentOperand.textContent;
         previousOperand.textContent += e.target.textContent;
         currentOperand.textContent = "";
+
     }else if(e.target.classList.contains("clear-all")){
         currentOperand.textContent = "";
         previousOperand.textContent = "";
@@ -35,11 +38,10 @@ function numbers(e){
         calc();
     }
 }
-
 function calc(){
     if(operator[operator.length - 1] == "+"){
         currentOperand.textContent = parseInt(currentOperand.textContent) + parseInt(previousOperand.textContent);
-        previousOperand.textContent = "";
+        previousOperand.textContent = currentOperand.textContent;
     }else if(operator[operator.length - 1]  == "-"){
         currentOperand.textContent = parseInt(previousOperand.textContent) - parseInt(currentOperand.textContent);
         previousOperand.textContent = "";
